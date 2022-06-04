@@ -2,7 +2,7 @@
 
 ## O que é React?
 
-React é um framework/biblioteca mantido pelo Facebook. Sua principal finalidade está na criação de interfaces gráficas fáceis de serem mantidas e reutilizadas. 
+React é um framework/biblioteca mantido pelo Facebook. Sua principal finalidade está na criação de interfaces gráficas fáceis de serem mantidas e reutilizadas.
 
 ## O que é JSX?
 
@@ -14,8 +14,7 @@ Babel é um compilador JavaScript, uma ferramenta que “transpila” ( mistura 
 
 ## O que é o webpack?
 
-O webpack é um empacotador de módulos ( module bundler ) para aplicações modernas JavaScript. Esta ferramenta permite agrupar, em um único arquivo, módulos presentes em um projeto. Este arquivo único pode ser minificado para redução de seu tamanho ou não. Em relação a sua funcionalidade, o webpack recebe um arquivo ‘.js’ de entrada ( o entry point ). A partir deste arquivo, é criado um “grafo de dependências” ( dependency graph ), isto é, todos os módulos que tiverem sido importados pelo arquivo de entrada, direta ou indiretamente, são identifacados e, por fim, agrupados. Dessa forma, para configurar o webpack você precisará mencionar o local do arquivo de entrada ( entry point ), e o local do arquivo de saída ( output ). 
-
+O webpack é um empacotador de módulos ( module bundler ) para aplicações modernas JavaScript. Esta ferramenta permite agrupar, em um único arquivo, módulos presentes em um projeto. Este arquivo único pode ser minificado para redução de seu tamanho ou não. Em relação a sua funcionalidade, o webpack recebe um arquivo ‘.js’ de entrada ( o entry point ). A partir deste arquivo, é criado um “grafo de dependências” ( dependency graph ), isto é, todos os módulos que tiverem sido importados pelo arquivo de entrada, direta ou indiretamente, são identifacados e, por fim, agrupados. Dessa forma, para configurar o webpack você precisará mencionar o local do arquivo de entrada ( entry point ), e o local do arquivo de saída ( output ).
 
 ## Iniciando um pequeno projeto
 
@@ -41,7 +40,6 @@ cria o arquivo “package.json” para automação de seus scripts e organizaç�
 
     $ npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader
 
-
 ### Resumidamente, o que estes pacotes significam para o projeto:
 
     “webpack” = Pacote genérico do webpack.
@@ -66,7 +64,7 @@ cria o arquivo “package.json” para automação de seus scripts e organizaç�
 
     “babel-loader” = Plugin do webpack que “transpila” o código.
 
-###  Configurando o arquivo “.babelrc”
+### Configurando o arquivo “.babelrc”
 
 Após a instalação das dependências, crie na raiz de seu projeto o arquivo ‘.babelrc’. Este é o arquivo de configuração do babel. Configure-o da seguinte forma:
 
@@ -114,7 +112,7 @@ E o configure da seguinte forma:
     ]
     };
 
-###  Criando um “Hello, World” com React
+### Criando um “Hello, World” com React
 
 Antes de criar o primeiro componente, devemos criar um template no diretório “src” para que o ReactDOM possa renderizar o código JavaScript em conteúdo HTML. Dessa forma crie, no diretório “src”, o arquivo “index.html” da seguinte forma:
 
@@ -128,11 +126,11 @@ Antes de criar o primeiro componente, devemos criar um template no diretório �
         </head>
 
         <body>
-            
+
             <div id='app'>
                 <!-- Conteúdo será renderizado aqui -->
             </div>
-            
+
         </body>
     </html>
 
@@ -162,7 +160,7 @@ O webpack é uma ferramenta que junta todos os módulos de um projeto em um úni
 
     import App from "./components/App";
 
-Agora falta só mais um detalhe: configurar o “package.json” para automatizar o início de sua aplicação. 
+Agora falta só mais um detalhe: configurar o “package.json” para automatizar o início de sua aplicação.
 
 ### Iniciando a sua aplicação
 
@@ -193,9 +191,35 @@ Para finalizar, abra o arquivo “package.json” que está presente na raíz de
             "webpack-cli": "^3.1.0",
             "webpack-dev-server": "^3.1.8"
         }
-    } 
+    }
 
 Por fim, use o seguinte comando:
 
     $ npm run start
 
+## Estrutura do projeto
+
+Este projeto é constituído de dois componentes:
+
+- `Input.js`: Este componente recebe todas as informações necessárias para renderizar um input
+- `Form.js`: Este componente renderiza o formulário.
+
+## Como o Form funciona?
+
+O componente define um estado inicial, que guarda as informações do formulário quando é renderizado pela primeira vez. Este objeto é no formato:
+
+```
+{
+    name: '',
+    email: '',
+}
+
+```
+
+Além disso, o componente utiliza o `useCallback` para definir duas funções:
+
+- `handleChange`: esta função atualiza o estado a cada alteração nos inputs
+- `handleSubmit`: esta função envia os dados ao webhook e traz o `Toast` com um feedback ao usuário.
+
+O componente também possui um estado `loading`, que é ativado e/ou desativado na função `handleSubmit`.
+Caso o estado `loading` seja verdadeiro, o componente renderizará uma animação.
